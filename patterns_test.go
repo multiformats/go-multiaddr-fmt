@@ -68,10 +68,12 @@ var TestVectors = map[string]*testVector{
 	"HTTP": {
 		Pattern: HTTP,
 		Good:    []string{"/ip4/1.2.3.4/http", "/dns4/example.io/http", "/dns6/::/tcp/7011/http", "/dnsaddr/example.io/http", "/ip6/fc00::/http"},
+		Bad:     []string{"/ip4/1.2.3.4/https", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
 	},
 	"HTTPS": {
 		Pattern: HTTPS,
 		Good:    []string{"/ip4/1.2.3.4/https", "/dns4/example.io/https", "/dns6/::/tcp/7011/https", "/ip6/fc00::/https"},
+		Bad:     []string{"/ip4/1.2.3.4/http", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
 	},
 }
 
