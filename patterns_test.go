@@ -44,14 +44,37 @@ var TestVectors = map[string]*testVector{
 			"/ip4/1.2.3.4/tcp/1234/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/tcp/1234/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/udp/1234/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
-			"/ip4/0.0.0.0/udp/1234/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"},
+			"/ip4/0.0.0.0/udp/1234/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+		},
 		Bad: []string{
 			"/ip4/1.2.3.4/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/tcp/123/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/udp/1234/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
-			"/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"}},
+			"/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+		},
+	},
+	"DNS": {
+		Pattern: DNS,
+		Good:    []string{"/dnsaddr/example.io", "/dns4/example.io", "/dns6/example.io"},
+		Bad:     []string{"/ip4/127.0.0.1"},
+	},
+	"WebRTCDirect": {
+		Pattern: WebRTCDirect,
+		Good:    []string{"/ip4/1.2.3.4/tcp/3456/http/p2p-webrtc-direct", "/ip6/::/tcp/0/http/p2p-webrtc-direct"},
+		Bad:     []string{"/ip4/0.0.0.0", "/ip6/fc00::", "/udp/12345", "/ip6/fc00::/tcp/5523/udp/9543"},
+	},
+	"HTTP": {
+		Pattern: HTTP,
+		Good:    []string{"/ip4/1.2.3.4/http", "/dns4/example.io/http", "/dns6/::/tcp/7011/http", "/dnsaddr/example.io/http", "/ip6/fc00::/http"},
+		Bad:     []string{"/ip4/1.2.3.4/https", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
+	},
+	"HTTPS": {
+		Pattern: HTTPS,
+		Good:    []string{"/ip4/1.2.3.4/https", "/dns4/example.io/https", "/dns6/::/tcp/7011/https", "/ip6/fc00::/https"},
+		Bad:     []string{"/ip4/1.2.3.4/http", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
+	},
 }
 
 func TestProtocolMatching(t *testing.T) {
