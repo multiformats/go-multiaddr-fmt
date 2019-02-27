@@ -55,7 +55,6 @@ var HTTP = Or(
 	And(TCP, Base(ma.P_HTTP)),
 	And(IP, Base(ma.P_HTTP)),
 	And(DNS, Base(ma.P_HTTP)),
-	And(DNS),
 )
 
 // Define https over TCP or DNS or https over DNS format multiaddr
