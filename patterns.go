@@ -23,13 +23,19 @@ var DNS = Or(
 // Define IP as either ipv4 or ipv6
 var IP = Or(Base(ma.P_IP4), Base(ma.P_IP6))
 
-// Define TCP as 'tcp' on top of either ipv4 or ipv6
-var TCP = And(IP, Base(ma.P_TCP))
+// Define TCP as 'tcp' on top of either ipv4 or ipv6, or dns equivalents.
+var TCP = Or(
+	And(DNS, Base(ma.P_TCP)),
+	And(IP, Base(ma.P_TCP)),
+)
 
-// Define UDP as 'udp' on top of either ipv4 or ipv6
-var UDP = And(IP, Base(ma.P_UDP))
+// Define UDP as 'udp' on top of either ipv4 or ipv6, or dns equivalents.
+var UDP = Or(
+	And(DNS, Base(ma.P_UDP)),
+	And(IP, Base(ma.P_UDP)),
+)
 
-// Define UTP as 'utp' on top of udp (on top of ipv4 or ipv6)
+// Define UTP as 'utp' on top of udp (on top of ipv4 or ipv6).
 var UTP = And(UDP, Base(ma.P_UTP))
 
 // Define QUIC as 'quic' on top of udp (on top of ipv4 or ipv6)

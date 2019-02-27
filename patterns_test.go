@@ -43,9 +43,6 @@ func TestBasicMatching(t *testing.T) {
 		"/dns4/ipfs.io",
 		"/dns4/libp2p.io",
 		"/dns6/protocol.ai",
-		"/dns4/protocol.ai/tcp/80",
-		"/dns6/protocol.ai/tcp/80",
-		"/dnsaddr/protocol.ai/tcp/8",
 	}
 
 	bad_dns := []string{
@@ -65,6 +62,9 @@ func TestBasicMatching(t *testing.T) {
 	good_tcp := []string{
 		"/ip4/0.0.7.6/tcp/1234",
 		"/ip6/::/tcp/0",
+		"/dns4/protocol.ai/tcp/80",
+		"/dns6/protocol.ai/tcp/80",
+		"/dnsaddr/protocol.ai/tcp/8",
 	}
 
 	bad_tcp := []string{
@@ -75,6 +75,9 @@ func TestBasicMatching(t *testing.T) {
 	good_udp := []string{
 		"/ip4/0.0.7.6/udp/1234",
 		"/ip6/::/udp/0",
+		"/dns4/protocol.ai/udp/80",
+		"/dns6/protocol.ai/udp/80",
+		"/dnsaddr/protocol.ai/udp/8",
 	}
 
 	bad_udp := []string{
