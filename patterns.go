@@ -41,11 +41,25 @@ var UTP = And(UDP, Base(ma.P_UTP))
 // Define QUIC as 'quic' on top of udp (on top of ipv4 or ipv6)
 var QUIC = And(UDP, Base(ma.P_QUIC))
 
-// Define unreliable transport as udp
+// Define garlic32 (i2p hashed) as it self
+var GARLIC32 = Base(ma.P_GARLIC32)
+
+// Define garlic64 (i2p destination) as it self
+var GARLIC64 = Base(ma.P_GARLIC64)
+
+// Define garlic (i2p destination or hashed) as any of garlic32 or garlic64
+var GARLIC = Or(GARLIC64, GARLIC32)
+
+// Define sam3 as tcp or udp and sam3
+// Sam3 have a special case, he can't be used to connect to other peers but his
+// instance allow to listen and connect garlic
+var SAM3 = And(Or(TCP, UDP), Base(ma.P_SAM3))
+
+// Define unreliable transport as udp or sam3
 var Unreliable = Or(UDP)
 
-// Now define a Reliable transport as either tcp or utp or quic
-var Reliable = Or(TCP, UTP, QUIC)
+// Now define a Reliable transport as either tcp or utp or quic or garlic
+var Reliable = Or(TCP, UTP, QUIC, GARLIC)
 
 // IPFS can run over any reliable underlying transport protocol
 var IPFS = And(Reliable, Base(ma.P_IPFS))

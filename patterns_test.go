@@ -38,6 +38,26 @@ var TestVectors = map[string]*testVector{
 		Good:    []string{"/ip4/1.2.3.4/udp/1234/quic", "/ip6/::/udp/1234/quic"},
 		Bad:     []string{"/ip4/0.0.0.0/tcp/12345/quic", "/ip6/1.2.3.4/ip4/0.0.0.0/udp/1234/quic", "/quic"},
 	},
+	"SAM3": {
+		Pattern: SAM3,
+		Good:    []string{"/ip4/1.2.3.4/udp/1234/sam3/3|3|6|6|2|2", "/ip6/::1/tcp/1234/sam3/3|3|6|6|2|2"},
+		Bad:     []string{"/ip4/0.0.0.0/sam3/3|3|6|6|2|2", "/sam3/3|3|6|6|2|2", "/sam3"},
+	},
+	"GARLIC": {
+		Pattern: GARLIC,
+		Good: []string{
+			"/garlic32/6zlio2ipbnmir26nrspdbt4cqnhu52ekw2gw6kfca4p77tdtsmja",
+			"/garlic64/Z1XdSy9zNg1IaFfDqWhpzoSjlf-lAWT4YkrRkq3rsnQyY69QXc~-2Xeyoj7~36swjrHjlH-OqvTbM0jFAc2RzIQ1VEf9uDUAz1sso9~or1xIDxsEUmgK~TQvHMPNFwVGhMxZ7K4LkLbi~sN2WlZB49FhhWVgD-nV-WfuRi~aByMUGtM1SqBML-Ok1bI6Pw9o6VIM-aFG7RLj1s8RsJOCzkugKLMsW-k5gXze6QJlRJKlcHI23bf-LPqhTfVe2HpEjS5DAj1fohtY63V3Kksd34Ejh86I-njBYGG66enBHvM-sRKAUQIKAt7eJEuk7l5BcidGD4HqodRl1nYBrHoP0MFDtw4ZTLcefVCwZ~OttpnUdH~9RBPBxc9Da-mVOe9dh608anxuXTBaKzdN6FQjxnMPEMQe5pBPzjGrkUpgCJLduybMltVymlYIMR98dPpBskqJQjuEm5tHBSWJfiKD9POVKIV0yyjlakoHm4Y~Zrl14GdFTIf2BGHMjf9GP0Q5BQAEAAcAAA==",
+		},
+		Bad: []string{
+			"/ip4/0.0.0.0/tcp/12345/garlic32/6zlio2ipbnmir26nrspdbt4cqnhu52ekw2gw6kfca4p77tdtsmja",
+			"/ip4/0.0.0.0/tcp/12345/garlic64/Z1XdSy9zNg1IaFfDqWhpzoSjlf-lAWT4YkrRkq3rsnQyY69QXc~-2Xeyoj7~36swjrHjlH-OqvTbM0jFAc2RzIQ1VEf9uDUAz1sso9~or1xIDxsEUmgK~TQvHMPNFwVGhMxZ7K4LkLbi~sN2WlZB49FhhWVgD-nV-WfuRi~aByMUGtM1SqBML-Ok1bI6Pw9o6VIM-aFG7RLj1s8RsJOCzkugKLMsW-k5gXze6QJlRJKlcHI23bf-LPqhTfVe2HpEjS5DAj1fohtY63V3Kksd34Ejh86I-njBYGG66enBHvM-sRKAUQIKAt7eJEuk7l5BcidGD4HqodRl1nYBrHoP0MFDtw4ZTLcefVCwZ~OttpnUdH~9RBPBxc9Da-mVOe9dh608anxuXTBaKzdN6FQjxnMPEMQe5pBPzjGrkUpgCJLduybMltVymlYIMR98dPpBskqJQjuEm5tHBSWJfiKD9POVKIV0yyjlakoHm4Y~Zrl14GdFTIf2BGHMjf9GP0Q5BQAEAAcAAA==",
+			"/garlic32",
+			"/garlic64",
+			"/garlic32/Z1XdSy9zNg1IaFfDqWhpzoSjlf-lAWT4YkrRkq3rsnQyY69QXc~-2Xeyoj7~36swjrHjlH-OqvTbM0jFAc2RzIQ1VEf9uDUAz1sso9~or1xIDxsEUmgK~TQvHMPNFwVGhMxZ7K4LkLbi~sN2WlZB49FhhWVgD-nV-WfuRi~aByMUGtM1SqBML-Ok1bI6Pw9o6VIM-aFG7RLj1s8RsJOCzkugKLMsW-k5gXze6QJlRJKlcHI23bf-LPqhTfVe2HpEjS5DAj1fohtY63V3Kksd34Ejh86I-njBYGG66enBHvM-sRKAUQIKAt7eJEuk7l5BcidGD4HqodRl1nYBrHoP0MFDtw4ZTLcefVCwZ~OttpnUdH~9RBPBxc9Da-mVOe9dh608anxuXTBaKzdN6FQjxnMPEMQe5pBPzjGrkUpgCJLduybMltVymlYIMR98dPpBskqJQjuEm5tHBSWJfiKD9POVKIV0yyjlakoHm4Y~Zrl14GdFTIf2BGHMjf9GP0Q5BQAEAAcAAA==",
+			"/garlic64/6zlio2ipbnmir26nrspdbt4cqnhu52ekw2gw6kfca4p77tdtsmja",
+		},
+	},
 	"IPFS": {
 		Pattern: IPFS,
 		Good: []string{
@@ -45,6 +65,8 @@ var TestVectors = map[string]*testVector{
 			"/ip6/::/tcp/1234/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip6/::/udp/1234/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 			"/ip4/0.0.0.0/udp/1234/utp/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+			"/garlic32/6zlio2ipbnmir26nrspdbt4cqnhu52ekw2gw6kfca4p77tdtsmja/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+			"/garlic64/Z1XdSy9zNg1IaFfDqWhpzoSjlf-lAWT4YkrRkq3rsnQyY69QXc~-2Xeyoj7~36swjrHjlH-OqvTbM0jFAc2RzIQ1VEf9uDUAz1sso9~or1xIDxsEUmgK~TQvHMPNFwVGhMxZ7K4LkLbi~sN2WlZB49FhhWVgD-nV-WfuRi~aByMUGtM1SqBML-Ok1bI6Pw9o6VIM-aFG7RLj1s8RsJOCzkugKLMsW-k5gXze6QJlRJKlcHI23bf-LPqhTfVe2HpEjS5DAj1fohtY63V3Kksd34Ejh86I-njBYGG66enBHvM-sRKAUQIKAt7eJEuk7l5BcidGD4HqodRl1nYBrHoP0MFDtw4ZTLcefVCwZ~OttpnUdH~9RBPBxc9Da-mVOe9dh608anxuXTBaKzdN6FQjxnMPEMQe5pBPzjGrkUpgCJLduybMltVymlYIMR98dPpBskqJQjuEm5tHBSWJfiKD9POVKIV0yyjlakoHm4Y~Zrl14GdFTIf2BGHMjf9GP0Q5BQAEAAcAAA==/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
 		},
 		Bad: []string{
 			"/ip4/1.2.3.4/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
