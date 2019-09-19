@@ -57,7 +57,7 @@ var TestVectors = map[string]*testVector{
 	},
 	"DNS": {
 		Pattern: DNS,
-		Good:    []string{"/dnsaddr/example.io", "/dns4/example.io", "/dns6/example.io"},
+		Good:    []string{"/dnsaddr/example.io", "/dns4/example.io", "/dns6/example.io", "/dns/exmaple.io"},
 		Bad:     []string{"/ip4/127.0.0.1"},
 	},
 	"WebRTCDirect": {
