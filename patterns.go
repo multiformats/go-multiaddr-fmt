@@ -47,8 +47,13 @@ var Unreliable = Or(UDP)
 // Now define a Reliable transport as either tcp or utp or quic
 var Reliable = Or(TCP, UTP, QUIC)
 
+// P2P can run over any reliable underlying transport protocol
+var P2P = And(Reliable, Base(ma.P_P2P))
+
 // IPFS can run over any reliable underlying transport protocol
-var IPFS = And(Reliable, Base(ma.P_IPFS))
+//
+// Deprecated: use P2P
+var IPFS = P2P
 
 // Define http over TCP or DNS or http over DNS format multiaddr
 var HTTP = Or(
