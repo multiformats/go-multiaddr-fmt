@@ -4,18 +4,17 @@ import (
 	"strings"
 
 	ma "github.com/multiformats/go-multiaddr"
-	madns "github.com/multiformats/go-multiaddr-dns"
 )
 
 // Define a dns4 format multiaddr
-var DNS4 = Base(madns.P_DNS4)
+var DNS4 = Base(ma.P_DNS4)
 
 // Define a dns6 format multiaddr
-var DNS6 = Base(madns.P_DNS6)
+var DNS6 = Base(ma.P_DNS6)
 
 // Define a dnsaddr, dns4 or dns6 format multiaddr
 var DNS = Or(
-	Base(madns.P_DNSADDR),
+	Base(ma.P_DNSADDR),
 	DNS4,
 	DNS6,
 )
