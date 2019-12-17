@@ -75,6 +75,16 @@ var TestVectors = map[string]*testVector{
 		Good:    []string{"/ip4/1.2.3.4/https", "/dns4/example.io/https", "/dns6/::/tcp/7011/https", "/ip6/fc00::/https"},
 		Bad:     []string{"/ip4/1.2.3.4/http", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
 	},
+	"ONION": {
+		Pattern: ONION,
+		Good: []string{"/onion/timaq4ygg2iegci7:1234", "/onion3/vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopnpyyd:1234"},
+		Bad:  []string{"/onion/timaq4ygg2iegci:80", "/onion/timaq4ygg2iegci7:-1", "/onion/timaq4ygg2iegci7", 
+			"/onion3/vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopyyd:1234", 
+			"/onion3/vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopnpyyd:-1", 
+			"/onion3/vww6ybal4bd7szmgncyruucpgfkqahzddi37ktceo3ah7ngmcopnpyyd"},
+	},
+
+
 }
 
 func TestProtocolMatching(t *testing.T) {
