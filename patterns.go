@@ -15,7 +15,6 @@ var DNS6 = Base(ma.P_DNS6)
 // Define a dnsaddr, dns, dns4 or dns6 format multiaddr
 var DNS = Or(
 	Base(ma.P_DNS),
-	Base(ma.P_DNSADDR),
 	DNS4,
 	DNS6,
 )
