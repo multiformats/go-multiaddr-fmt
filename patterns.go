@@ -59,6 +59,7 @@ var HTTP = Or(
 	And(TCP, Base(ma.P_HTTP)),
 	And(IP, Base(ma.P_HTTP)),
 	And(DNS, Base(ma.P_HTTP)),
+	And(Base(ma.P_DNSADDR), Base(ma.P_HTTP)),
 )
 
 // Define https over TCP or DNS or https over DNS format multiaddr
@@ -66,6 +67,7 @@ var HTTPS = Or(
 	And(TCP, Base(ma.P_HTTPS)),
 	And(IP, Base(ma.P_HTTPS)),
 	And(DNS, Base(ma.P_HTTPS)),
+	And(Base(ma.P_DNSADDR), Base(ma.P_HTTPS)),
 )
 
 // Define p2p-webrtc-direct over HTTP or p2p-webrtc-direct over HTTPS format multiaddr
