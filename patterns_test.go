@@ -57,8 +57,8 @@ var TestVectors = map[string]*testVector{
 	},
 	"DNS": {
 		Pattern: DNS,
-		Good:    []string{"/dnsaddr/example.io", "/dns4/example.io", "/dns6/example.io", "/dns/exmaple.io"},
-		Bad:     []string{"/ip4/127.0.0.1"},
+		Good:    []string{"/dns4/example.io", "/dns6/example.io", "/dns/exmaple.io"},
+		Bad:     []string{"/dnsaddr/example.io", "/ip4/127.0.0.1"},
 	},
 	"WebRTCDirect": {
 		Pattern: WebRTCDirect,
@@ -67,8 +67,8 @@ var TestVectors = map[string]*testVector{
 	},
 	"HTTP": {
 		Pattern: HTTP,
-		Good:    []string{"/ip4/1.2.3.4/http", "/dns4/example.io/http", "/dns6/::/tcp/7011/http", "/dnsaddr/example.io/http", "/ip6/fc00::/http"},
-		Bad:     []string{"/ip4/1.2.3.4/https", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523"},
+		Good:    []string{"/ip4/1.2.3.4/http", "/dns4/example.io/http", "/dns6/::/tcp/7011/http", "/ip6/fc00::/http"},
+		Bad:     []string{"/ip4/1.2.3.4/https", "/ip4/0.0.0.0/tcp/12345/quic", "/ip6/fc00::/tcp/5523", "/dnsaddr/example.io/http"},
 	},
 	"HTTPS": {
 		Pattern: HTTPS,
@@ -79,6 +79,9 @@ var TestVectors = map[string]*testVector{
 
 func TestProtocolMatching(t *testing.T) {
 	for name, tc := range TestVectors {
+		name := name
+		tc := tc
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
