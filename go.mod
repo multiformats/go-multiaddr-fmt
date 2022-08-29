@@ -1,6 +1,6 @@
 module github.com/multiformats/go-multiaddr-fmt
 
-require github.com/multiformats/go-multiaddr v0.2.1
+require github.com/multiformats/go-multiaddr v0.4.0
 
 require (
 	github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1 // indirect
