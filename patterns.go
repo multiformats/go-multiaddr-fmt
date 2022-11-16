@@ -38,7 +38,7 @@ var UDP = Or(
 var UTP = And(UDP, Base(ma.P_UTP))
 
 // Define QUIC as 'quic' on top of udp (on top of ipv4 or ipv6)
-var QUIC = And(UDP, Base(ma.P_QUIC))
+var QUIC = And(UDP, Or(Base(ma.P_QUIC_V1)), Base(ma.P_QUIC))
 
 // Define unreliable transport as udp
 var Unreliable = Or(UDP)
