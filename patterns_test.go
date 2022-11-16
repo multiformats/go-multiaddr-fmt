@@ -35,7 +35,7 @@ var TestVectors = map[string]*testVector{
 	},
 	"QUIC": {
 		Pattern: QUIC,
-		Good:    []string{"/ip4/1.2.3.4/udp/1234/quic", "/ip6/::/udp/1234/quic"},
+		Good:    []string{"/ip4/1.2.3.4/udp/1234/quic", "/ip6/::/udp/1234/quic", "/ip4/1.2.3.4/udp/1234/quic-v1", "/ip6/::/udp/1234/quic-v1"},
 		Bad:     []string{"/ip4/0.0.0.0/tcp/12345/quic", "/ip6/1.2.3.4/ip4/0.0.0.0/udp/1234/quic", "/quic"},
 	},
 	"IPFS": {
