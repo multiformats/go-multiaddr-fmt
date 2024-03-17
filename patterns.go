@@ -174,3 +174,26 @@ func (p Base) partialMatch(pcs []ma.Protocol) (bool, []ma.Protocol) {
 func (p Base) String() string {
 	return ma.ProtocolWithCode(int(p)).Name
 }
+
+// Nothing match an empty multiaddress, this let you write things like this:
+//
+//	mafmt.And(mafmt.TCP, mafmt.Or(mafmt.Nothing, mafmt.Base(ma.P_TLS)))
+//
+// For a matcher which accepts tcp maddrs with an optional TLS suffix.
+var Nothing empty
+
+var _ Pattern = empty{}
+
+type empty struct{}
+
+func (empty) Matches(a ma.Multiaddr) bool {
+	return len(a.Bytes()) == 0
+}
+
+func (empty) partialMatch(pcs []ma.Protocol) (bool, []ma.Protocol) {
+	return len(pcs) == 0, pcs
+}
+
+func (empty) String() string {
+	return ""
+}
