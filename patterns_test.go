@@ -109,6 +109,22 @@ func TestUnreliableGroup(t *testing.T) {
 	assertMismatches(t, Unreliable, TestVectors["IP"].Good, TestVectors["TCP"].Good, TestVectors["UTP"].Good, TestVectors["IPFS"].Good, TestVectors["QUIC"].Good)
 }
 
+func TestNothing(t *testing.T) {
+	matcher := And(TCP, Or(Nothing, Base(ma.P_TLS)))
+	good := TestVectors["TCP"].Good
+	good = good[:len(good):len(good)]
+	for _, v := range good {
+		good = append(good, v+"/tls")
+	}
+	bad := TestVectors["TCP"].Good
+	bad = bad[:len(bad):len(bad)]
+	for _, v := range bad {
+		bad = append(bad, v+"/tls")
+	}
+	assertMatches(t, matcher, good)
+	assertMismatches(t, Unreliable, bad)
+}
+
 func assertMatches(t *testing.T, p Pattern, args ...[]string) {
 	t.Helper()
 
