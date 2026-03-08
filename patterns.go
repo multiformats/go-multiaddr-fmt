@@ -73,6 +73,15 @@ var WebRTCDirect = Or(
 	And(HTTP, Base(ma.P_P2P_WEBRTC_DIRECT)),
 	And(HTTPS, Base(ma.P_P2P_WEBRTC_DIRECT)))
 
+// Define a onion v2 format multiaddr
+var ONION2 = Base(ma.P_ONION)
+
+// Define a onion v3 format multiaddr
+var ONION3 = Base(ma.P_ONION3)
+
+// Define both onion v2 and v3 multiaddr
+var ONION = Or(ONION2, ONION3)
+    
 const (
 	or  = iota
 	and = iota
