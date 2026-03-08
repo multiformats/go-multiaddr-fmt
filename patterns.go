@@ -79,6 +79,10 @@ const (
 )
 
 func And(ps ...Pattern) Pattern {
+	if len(ps) == 1 {
+		return ps[0]
+	}
+
 	return &pattern{
 		Op:   and,
 		Args: ps,
@@ -86,6 +90,10 @@ func And(ps ...Pattern) Pattern {
 }
 
 func Or(ps ...Pattern) Pattern {
+	if len(ps) == 1 {
+		return ps[0]
+	}
+
 	return &pattern{
 		Op:   or,
 		Args: ps,
